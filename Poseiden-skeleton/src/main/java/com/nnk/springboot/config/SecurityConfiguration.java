@@ -19,14 +19,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 
-<<<<<<< HEAD
-//	@Autowired
-//	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("password")).roles("USER");
-//	}
-
-=======
->>>>>>> master
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/home/**", "/user/**").permitAll()
@@ -35,10 +27,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.logoutSuccessUrl("/home/**").and().httpBasic();
 	}
 
+//	@Autowired
+//	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//		auth.jdbcAuthentication().dataSource(dataSource).withDefaultSchema().withUser("user")
+//				.password(passwordEncoder().encode("password")).roles("USER");
+//	}
+
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().dataSource(dataSource).withDefaultSchema().withUser("user")
-				.password(passwordEncoder().encode("password")).roles("USER");
+		auth.jdbcAuthentication().dataSource(dataSource)
+				.usersByUsernameQuery("select username, password, fullname, role" + "from users" + "where id = ? ")
+				.authoritiesByUsernameQuery("select username, role" + "from users" + "where id = ? ");
 	}
 
 	@Bean
