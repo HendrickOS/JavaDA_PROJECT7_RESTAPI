@@ -19,11 +19,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 
+<<<<<<< HEAD
 //	@Autowired
 //	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 //		auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("password")).roles("USER");
 //	}
 
+=======
+>>>>>>> master
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/home/**", "/user/**").permitAll()
