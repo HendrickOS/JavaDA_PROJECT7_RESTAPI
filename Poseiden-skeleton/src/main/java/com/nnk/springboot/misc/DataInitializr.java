@@ -8,14 +8,13 @@ import com.nnk.springboot.domain.User;
 public class DataInitializr {
 
 	public void init() {
-		UserEntity user = new UserEntity();
 		User user = new User();
 
-		user.setUsername(null);
-		user.setPassword("user123");
-		user.setFullname(null);
-		user.setRole(null);
-		user.setEmail("springuser");
+		user.setUsername("test");
+		user.setPassword("test");
+		user.setFullname("test");
+		user.setRole("USER");
+
 		userDAO.save(user);
 	}
 }
