@@ -3,7 +3,6 @@ package com.nnk.springboot.misc;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -19,20 +18,20 @@ public class DataInitializr {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
 	@PostConstruct
 	public void init() {
-		User user = new User();
+		User existingUser = userDao.findByUsername("testu");
 
-		user.setUsername("testu");
-		user.setFullname("testfn");
-		user.setRole("USER");
+		if (existingUser == null) {
+			User user = new User();
+			user.setId(1);
+			user.setUsername("testu");
+			user.setFullname("testfn");
+			user.setRole("USER");
 
-		user.setPassword(passwordEncoder.encode("testp"));
-//		user.setPassword(passwordEncoder.encode(user.getPassword()));
+			user.setPassword(passwordEncoder.encode("testp"));
 
-		userDao.save(user);
+			userDao.save(user);
+		}
 	}
 }
