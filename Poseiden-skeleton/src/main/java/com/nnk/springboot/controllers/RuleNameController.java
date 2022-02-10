@@ -24,7 +24,7 @@ public class RuleNameController {
 	// TODO: find all RuleName, add to model
 	@RequestMapping("/ruleName/list")
 	public String home(Model model) {
-		model.addAttribute("rulesName", ruleNameRepository.findAll());
+		model.addAttribute("ruleName", ruleNameRepository.findAll());
 		return "ruleName/list";
 	}
 
@@ -38,7 +38,8 @@ public class RuleNameController {
 	public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
 		if (!result.hasErrors()) {
 			ruleNameRepository.save(ruleName);
-			model.addAttribute("rulesName", ruleNameRepository.findAll());
+			model.addAttribute("ruleName", ruleNameRepository.findAll());
+			return "redirect:/ruleName/list";
 		}
 		return "ruleName/add";
 	}
@@ -58,11 +59,11 @@ public class RuleNameController {
 	public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName, BindingResult result,
 			Model model) {
 		if (result.hasErrors()) {
-			return "user/update";
+			return "ruleName/update";
 		}
 		ruleName.setId(id);
 		ruleNameRepository.save(ruleName);
-		model.addAttribute("rulesName", ruleNameRepository.findAll());
+		model.addAttribute("ruleName", ruleNameRepository.findAll());
 		return "redirect:/ruleName/list";
 	}
 
@@ -72,7 +73,7 @@ public class RuleNameController {
 		RuleName ruleName = ruleNameRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid ruleName Id:" + id));
 		ruleNameRepository.delete(ruleName);
-		model.addAttribute("rulesName", ruleNameRepository.findAll());
+		model.addAttribute("ruleName", ruleNameRepository.findAll());
 		return "redirect:/ruleName/list";
 	}
 }
