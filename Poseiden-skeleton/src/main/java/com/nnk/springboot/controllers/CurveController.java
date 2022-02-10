@@ -24,7 +24,7 @@ public class CurveController {
 	// TODO: find all Curve Point, add to model
 	@RequestMapping("/curvePoint/list")
 	public String home(Model model) {
-		model.addAttribute("curvePoint", curvePointRepository.findAll());
+		model.addAttribute("curvepoint", curvePointRepository.findAll());
 		return "curvePoint/list";
 	}
 
@@ -38,7 +38,7 @@ public class CurveController {
 	public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
 		if (!result.hasErrors()) {
 			curvePointRepository.save(curvePoint);
-			model.addAttribute("curvePoint", curvePointRepository.findAll());
+			model.addAttribute("curvepoint", curvePointRepository.findAll());
 			return "redirect:/curvePoint/list";
 		}
 		return "curvePoint/add";
@@ -63,7 +63,7 @@ public class CurveController {
 		}
 		curvePoint.setId(id);
 		curvePointRepository.save(curvePoint);
-		model.addAttribute("curvePoint", curvePointRepository.findAll());
+		model.addAttribute("curvepoint", curvePointRepository.findAll());
 		return "redirect:/curvePoint/list";
 	}
 
@@ -73,7 +73,7 @@ public class CurveController {
 		CurvePoint curvePoint = curvePointRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid curvePoint Id:" + id));
 		curvePointRepository.delete(curvePoint);
-		model.addAttribute("curvePoint", curvePointRepository.findAll());
+		model.addAttribute("curvepoint", curvePointRepository.findAll());
 		return "redirect:/curvePoint/list";
 	}
 }
