@@ -34,8 +34,8 @@
 					<th>Description</th>
 					<th>Json</th>
 					<th>Template</th>
-					<th>SQL</th>
-					<th>sqlPart</th>
+					<th>SQL Str</th>
+					<th>SQL Part</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -47,7 +47,7 @@
 					<td th:text="${rulename.description}"></td>
 					<td th:text="${rulename.json}"></td>
 					<td th:text="${rulename.template}"></td>
-					<td th:text="${rulename.sql}"></td>
+					<td th:text="${rulename.sqlStr}"></td>
 					<td style="width: 25%" th:text="${rulename.sqlPart}"></td>
 					<td style="width: 15%" class="text-center">
 						<a th:href="@{/rulename/update/{id}(id=${rulename.id})}">Edit</a>&nbsp;|&nbsp;
