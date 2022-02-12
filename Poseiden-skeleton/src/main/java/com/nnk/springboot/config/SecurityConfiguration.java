@@ -23,8 +23,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/home/**", "/user/**").permitAll()
 				.antMatchers("/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**")
-				.access("hasRole('USER')").anyRequest().authenticated().and().formLogin().and().logout()
-				.logoutSuccessUrl("/home/**").and().httpBasic();
+				.hasAnyAuthority("ADMIN", "USER").anyRequest().authenticated().and().formLogin().and().logout()
+				.logoutUrl("/app-logout").logoutSuccessUrl("/").and().httpBasic();
 	}
 
 	@Autowired
