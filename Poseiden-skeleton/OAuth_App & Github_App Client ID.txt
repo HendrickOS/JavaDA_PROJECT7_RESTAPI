@@ -1,0 +1,7 @@
+OAuth App :
+	Client ID : b46a5c35a9a0e45ce4b0
+	Client Secret ID : c3d6b36e425bbde18a8c7538a8fa8f2456e6f707
+
+GitHub App :
+	Client ID : Iv1.fa83419c046a1381
+	Client Secret ID : e9c12d52a483adbe008dac8d3fb628162a5073d1
