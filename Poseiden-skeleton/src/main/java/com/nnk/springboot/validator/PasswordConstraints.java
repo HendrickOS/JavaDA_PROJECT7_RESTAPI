@@ -17,4 +17,8 @@ public @interface PasswordConstraints {
 
 	String message() default "Invalid password";
 
+	Class<?>[] groups() default {};
+
+	public abstract Class<? extends Payload>[] payload() default {};
+
 }

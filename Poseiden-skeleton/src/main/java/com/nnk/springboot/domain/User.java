@@ -9,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "users")
+@PasswordRules
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

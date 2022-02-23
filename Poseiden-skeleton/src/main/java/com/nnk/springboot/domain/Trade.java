@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "trade")
 public class Trade {
@@ -21,14 +23,17 @@ public class Trade {
 	private Double buyPrice;
 	private Double sellPrice;
 	private String benchmark;
+	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Timestamp tradeDate;
 	private String security;
 	private String status;
 	private String trader;
 	private String book;
 	private String creationName;
+	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Timestamp creationDate;
 	private String revisionName;
+	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Timestamp revisionDate;
 	private String dealName;
 	private String dealType;

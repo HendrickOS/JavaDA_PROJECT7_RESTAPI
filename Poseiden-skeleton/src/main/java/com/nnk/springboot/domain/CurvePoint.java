@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "curvepoint")
 public class CurvePoint {
@@ -17,9 +19,11 @@ public class CurvePoint {
 	private Integer id;
 	@NotNull
 	private Integer curveId;
+	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Timestamp asOfDate;
 	private Double term;
 	private Double value;
+	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Timestamp creationDate;
 
 	public Integer getId() {

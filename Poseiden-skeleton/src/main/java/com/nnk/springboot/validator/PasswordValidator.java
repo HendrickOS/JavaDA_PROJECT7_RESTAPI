@@ -5,15 +5,18 @@ import java.util.ArrayList;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class PasswordValidator implements ConstraintValidator<PasswordConstraints, String> {
+import com.nnk.springboot.domain.PasswordRules;
+import com.nnk.springboot.domain.User;
+
+public class PasswordValidator implements ConstraintValidator<PasswordRules, User> {
 
 	@Override
-	public void initialize(PasswordConstraints passwordConstraints) {
+	public void initialize(PasswordRules passwordRules) {
 
 	}
 
 	@Override
-	public boolean isValid(String password, ConstraintValidatorContext cxt) {
+	public boolean isValid(User user, ConstraintValidatorContext cxt) {
 		boolean majExist = false;
 		boolean digitExist = false;
 		ArrayList<Character> specialCharacters = new ArrayList<Character>();
@@ -23,6 +26,8 @@ public class PasswordValidator implements ConstraintValidator<PasswordConstraint
 		specialCharacters.add('-');
 		specialCharacters.add('_');
 		boolean specialCharacterExist = false;
+		String password = user.getPassword();
+		int i;
 		for (char c : password) {
 			if (Character.isUpperCase(c)) {
 				majExist = true;

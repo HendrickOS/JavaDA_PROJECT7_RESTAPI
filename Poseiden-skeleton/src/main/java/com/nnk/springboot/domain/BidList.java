@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "bidlist")
 public class BidList {
@@ -24,6 +26,7 @@ public class BidList {
 	private Double bid;
 	private Double ask;
 	private String benchmark;
+	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Timestamp bidListDate;
 	private String commentary;
 	private String security;
@@ -31,8 +34,10 @@ public class BidList {
 	private String trader;
 	private String book;
 	private String creationName;
+	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Timestamp creationDate;
 	private String revisionName;
+	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Timestamp revisionDate;
 	private String dealName;
 	private String dealType;
