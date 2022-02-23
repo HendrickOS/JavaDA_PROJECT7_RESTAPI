@@ -28,24 +28,25 @@ public class PasswordValidator implements ConstraintValidator<PasswordRules, Use
 		boolean specialCharacterExist = false;
 		String password = user.getPassword();
 		int i;
-		for (char c : password) {
-			if (Character.isUpperCase(c)) {
+//		for (char c : password) {
+		for (i = 0; i < password.length(); i++) {
+			if (Character.isUpperCase(password.charAt(i))) {
 				majExist = true;
 			} else {
 				System.out.print("Votre mot de passe ne contient pas de majuscule");
 			}
-			if (Character.isDigit(c)) {
+			if (Character.isDigit(password.charAt(i))) {
 				digitExist = true;
 			} else {
 				System.out.print("Votre mot de passe ne contient pas de chiffre");
 			}
-			for (Character i : specialCharacters) {
-				if (i.equals(c)) {
+			for (Character j : specialCharacters) {
+				if (j.equals(password.charAt(i))) {
 					specialCharacterExist = true;
 				}
 			}
-			return majExist && digitExist && specialCharacterExist;
 		}
+		return majExist && digitExist && specialCharacterExist;
 	}
 
 }
