@@ -37,8 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.parentAuthenticationManager(new CustomUserDetailsService());
-		auth.jdbcAuthentication().dataSource(dataSource)
+		auth.parentAuthenticationManager(new CustomUserDetailsService()).jdbcAuthentication().dataSource(dataSource)
 				.usersByUsernameQuery("select username, password, 1" + "from users " + "where username = ? ")
 				.authoritiesByUsernameQuery("select username, role " + "from users " + "where username = ? ");
 
