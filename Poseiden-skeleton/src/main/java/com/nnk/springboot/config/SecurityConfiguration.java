@@ -29,14 +29,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/home/**", "/user/**").permitAll()
-				.antMatchers("/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**")
-				.hasAnyAuthority("ADMIN", "USER").and().formLogin().and().logout().logoutUrl("/app-logout")
-				.logoutSuccessUrl("/").and().httpBasic().and().oauth2Login();
+		http.authorizeRequests().antMatchers("/bidList/**", "/rating/**", "/ruleName/**", "/trade/**", "/curvePoint/**")
+				.hasAnyAuthority("ADMIN", "USER").antMatchers("/user/**").permitAll().and().formLogin()
+				.defaultSuccessUrl("/bidList/list").and().logout().logoutUrl("/app-logout").logoutSuccessUrl("/").and()
+				.oauth2Login().defaultSuccessUrl("/app/oauth2LoginSuccess").and().exceptionHandling()
+				.accessDeniedPage("/app/error");
 	}
 
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder);
 		auth.parentAuthenticationManager(new CustomUserDetailsService()).jdbcAuthentication().dataSource(dataSource)
 				.usersByUsernameQuery("select username, password, 1" + "from users " + "where username = ? ")
 				.authoritiesByUsernameQuery("select username, role " + "from users " + "where username = ? ");
