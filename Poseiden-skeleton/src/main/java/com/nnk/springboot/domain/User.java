@@ -7,17 +7,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+//@PasswordRules
 @Entity
 @Table(name = "users")
-@PasswordRules
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	@NotBlank(message = "Username is mandatory")
 	private String username;
-//    @NotBlank(message = "Password is mandatory")
 //	@PasswordRules
+	@NotBlank(message = "Password is mandatory")
 	private String password;
 	@NotBlank(message = "FullName is mandatory")
 	private String fullname;

@@ -12,12 +12,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.nnk.springboot.services.MyAppUserDetailsService;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private DataSource dataSource;
+	@Autowired
+	private MyAppUserDetailsService myAppUserDetailsService;
 
 //	@Override
 //	protected void configure(HttpSecurity http) throws Exception {
@@ -39,7 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder);
+		auth.userDetailsService(myAppUserDetailsService).passwordEncoder(passwordEncoder);
 		auth.parentAuthenticationManager(new CustomUserDetailsService()).jdbcAuthentication().dataSource(dataSource)
 				.usersByUsernameQuery("select username, password, 1" + "from users " + "where username = ? ")
 				.authoritiesByUsernameQuery("select username, role " + "from users " + "where username = ? ");
