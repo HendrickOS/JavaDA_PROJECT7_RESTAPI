@@ -2,18 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title> Spring Boot </title>
-    <link rel="stylesheet" href="/css/styles.css"/>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
 </head>
 <body>
 <h3> HOME PAGE </h3>
 <p>
     <a href="/login">Login</a> or create one <a href="/user/list">User management</a>
-    <br>
-    <a href="/bidList/list">BidList Management</a> or <a href="/curvePoint/list">Curve Point Management</a>
-    <br>
-    <a href="/rating/list">Rating Management</a> or <a href="/rulename/list">Rule Name Management</a>
-    <br>
-    <a href="/trade/list">Trade Management</a>
-</p>
+    </p>
+    <div class="form-group">
+				<div class="col-sm-12">
+					<a class="btn btn-danger btn-sm" href="/login">Login</a>
+					<a class="btn btn-danger btn-sm" href="/user/list">User management</a>
+				</div>
+	</div>
+
 </body>
 </html>

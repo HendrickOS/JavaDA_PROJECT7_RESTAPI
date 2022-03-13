@@ -66,8 +66,8 @@ public class LoginController {
 	public String getOauth2LoginInfo(Model model,
 			@AuthenticationPrincipal OAuth2AuthenticationToken authenticationToken, HttpServletRequest request) {
 
-		// Générer mot de passe aléatoire
-		String characterPassword = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!?/-_";
+		// ----------------- Générer mot de passe aléatoire ---------------------------
+		String characterPassword = "0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXsYyZz!?/-_";
 		Random rnd = new Random();
 		StringBuilder passwordRandom = new StringBuilder(10);
 		String password;
@@ -76,7 +76,7 @@ public class LoginController {
 			passwordRandom.append(characterPassword.charAt(rnd.nextInt(characterPassword.length())));
 		}
 		password = passwordRandom.toString();
-		// Fin
+		// ---------- Fin -------------------
 
 		OAuth2User user = authenticationToken.getPrincipal();
 
@@ -87,7 +87,7 @@ public class LoginController {
 			User newUser = new User();
 			newUser.setUsername(githubUserName);
 			newUser.setFullname(githubUserName);
-			newUser.setPassword(encoder.encode("password"));
+			newUser.setPassword(encoder.encode(password));
 			newUser.setRole("USER");
 			userFromDB = userRepository.save(newUser);
 			// return "redirect:/app/error";
@@ -99,7 +99,8 @@ public class LoginController {
 		Authentication authentication = new UsernamePasswordAuthenticationToken(userFromDB.getFullname(), null,
 				autorities);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		return "/bidList/list";
+//		return "/bidList/list";
+		return "/menu";
 	}
 
 }
