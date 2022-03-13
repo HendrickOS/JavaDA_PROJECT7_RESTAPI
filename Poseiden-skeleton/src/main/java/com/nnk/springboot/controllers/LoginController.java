@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -64,6 +65,19 @@ public class LoginController {
 	@RequestMapping("oauth2LoginSuccess")
 	public String getOauth2LoginInfo(Model model,
 			@AuthenticationPrincipal OAuth2AuthenticationToken authenticationToken, HttpServletRequest request) {
+
+		// Générer mot de passe aléatoire
+		String characterPassword = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!?/-_";
+		Random rnd = new Random();
+		StringBuilder passwordRandom = new StringBuilder(10);
+		String password;
+
+		for (int i = 0; i < 10; i++) {
+			passwordRandom.append(characterPassword.charAt(rnd.nextInt(characterPassword.length())));
+		}
+		password = passwordRandom.toString();
+		// Fin
+
 		OAuth2User user = authenticationToken.getPrincipal();
 
 		String githubUserName = (String) user.getAttributes().get("login");
@@ -73,7 +87,7 @@ public class LoginController {
 			User newUser = new User();
 			newUser.setUsername(githubUserName);
 			newUser.setFullname(githubUserName);
-			newUser.setPassword(encoder.encode("toto"));
+			newUser.setPassword(encoder.encode("password"));
 			newUser.setRole("USER");
 			userFromDB = userRepository.save(newUser);
 			// return "redirect:/app/error";
