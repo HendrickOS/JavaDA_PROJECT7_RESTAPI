@@ -12,6 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -57,6 +58,8 @@ public class LoginController {
 
 	@Autowired
 	OAuth2AuthorizedClientService authclientService;
+	@Autowired
+	private PasswordEncoder encoder;
 
 	@RequestMapping("oauth2LoginSuccess")
 	public String getOauth2LoginInfo(Model model,
@@ -70,7 +73,7 @@ public class LoginController {
 			User newUser = new User();
 			newUser.setUsername(githubUserName);
 			newUser.setFullname(githubUserName);
-			newUser.setPassword("toto");
+			newUser.setPassword(encoder.encode("toto"));
 			newUser.setRole("USER");
 			userFromDB = userRepository.save(newUser);
 			// return "redirect:/app/error";
