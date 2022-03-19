@@ -18,6 +18,18 @@ public class BidListDaoImpl implements BidListDao {
 
 	@Override
 	public BidList save(BidList bidList) {
+//		if (bidList.getBidListId() == null) {
+//			List<BidList> findAll = findAll();
+//			int id = 0;
+//			if (findAll != null) {
+//				for (BidList bidList2 : findAll) {
+//					if (bidList2.getBidListId() > id) {
+//						id = bidList2.getBidListId();
+//					}
+//				}
+//			}
+//			bidList.setBidListId(id + 1);
+//		}
 		return bidListRepository.save(bidList);
 	}
 
@@ -45,6 +57,12 @@ public class BidListDaoImpl implements BidListDao {
 	@Override
 	public BidList findById(Integer id) {
 		return bidListRepository.findById(id).get();
+	}
+
+	@Override
+	public void delete(BidList bidList) {
+		bidListRepository.delete(bidList);
+
 	}
 
 }

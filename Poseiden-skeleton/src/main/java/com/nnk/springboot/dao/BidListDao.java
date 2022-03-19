@@ -14,4 +14,6 @@ public interface BidListDao {
 
 	BidList findById(Integer id);
 
+	void delete(BidList bidList);
+
 }
