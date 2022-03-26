@@ -26,6 +26,12 @@ public class CurvePoint {
 	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Timestamp creationDate;
 
+	public CurvePoint(int curveId, double term, double value) {
+		this.curveId = curveId;
+		this.term = term;
+		this.value = value;
+	}
+
 	public Integer getId() {
 		return id;
 	}

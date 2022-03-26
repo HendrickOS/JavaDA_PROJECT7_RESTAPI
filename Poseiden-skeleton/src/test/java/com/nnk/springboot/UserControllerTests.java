@@ -26,7 +26,7 @@ public class UserControllerTests {
 	@Test
 	void getUserList() {
 
-		User user = new User(1, "testUsername", "testPassword", "testFullname", "USER");
+		User user = new User("testUsername", "testPassword", "testFullname", "USER");
 
 		try {
 			mvc.perform(get("/user/list").contentType(MediaType.ALL_VALUE).characterEncoding("utf-8"))
@@ -41,7 +41,7 @@ public class UserControllerTests {
 	@Test
 	void addUserTest() {
 
-		User test = new User(1, "testUsername", "testPassword", "testFullname", "USER");
+		User test = new User("testUsername", "testPassword", "testFullname", "USER");
 
 		try {
 			mvc.perform(get("/user/add").param("user", test)).andDo(MockMvcResultHandlers.print())
