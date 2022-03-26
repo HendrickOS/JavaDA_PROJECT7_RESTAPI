@@ -24,7 +24,7 @@ public class RuleNameController {
 	// TODO: find all RuleName, add to model
 	@RequestMapping("/ruleName/list")
 	public String home(Model model) {
-		model.addAttribute("ruleName", ruleNameRepository.findAll());
+		model.addAttribute("rulename", ruleNameRepository.findAll());
 		return "ruleName/list";
 	}
 
@@ -38,7 +38,6 @@ public class RuleNameController {
 	public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
 		if (!result.hasErrors()) {
 			ruleNameRepository.save(ruleName);
-			model.addAttribute("ruleName", ruleNameRepository.findAll());
 			return "redirect:/ruleName/list";
 		}
 		return "ruleName/add";
