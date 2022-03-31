@@ -28,6 +28,10 @@ public class RuleName {
 		this.sqlPart = sqlPart;
 	}
 
+	public RuleName() {
+
+	}
+
 	public Integer getId() {
 		return id;
 	}

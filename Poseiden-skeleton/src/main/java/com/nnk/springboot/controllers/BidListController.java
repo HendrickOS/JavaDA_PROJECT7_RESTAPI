@@ -18,8 +18,6 @@ import com.nnk.springboot.domain.BidList;
 public class BidListController {
 
 	// TODO: Inject Bid service
-//	@Autowired
-//	BidListRepository bidListRepository;
 	@Autowired
 	BidListDao bidListDao;
 

@@ -23,14 +23,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private MyAppUserDetailsService myAppUserDetailsService;
 
-//	@Override
-//	protected void configure(HttpSecurity http) throws Exception {
-//		http.authorizeRequests().antMatchers("/home/**", "/user/**").permitAll()
-//				.antMatchers("/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**")
-//				.hasAnyAuthority("ADMIN", "USER").anyRequest().authenticated().and().formLogin().and().logout()
-//				.logoutUrl("/app-logout").logoutSuccessUrl("/").and().httpBasic();
-//	}
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/bidList/**", "/rating/**", "/ruleName/**", "/trade/**", "/curvePoint/**")

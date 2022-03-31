@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title> Spring Boot </title>
-    <link rel="stylesheet" href="/css/styles.css"/>
+<title>Spring Boot</title>
+<link rel="stylesheet" href="../../css/bootstrap.min.css">
 </head>
 <body>
-<h3> MENU PAGE </h3>
-<p>
-    <a href="/bidList/list">BidList Management</a> or <a href="/curvePoint/list">Curve Point Management</a>
-    <br>
-    <a href="/rating/list">Rating Management</a> or <a href="/rulename/list">Rule Name Management</a>
-    <br>
-    <a href="/trade/list">Trade Management</a>
-</p>
+	<h3>MENU PAGE</h3>
+	<div class="form-group">
+		<div class="col-sm-12">
+			<a class="btn btn-primary btn-sm" href="/bidList/list">BidList Management</a> or 
+			<a class="btn btn-primary btn-sm" href="/curvePoint/list">Curve Point Management</a> or 
+			<a class="btn btn-primary btn-sm" href="/rating/list">Rating Management</a> or 
+			<a class="btn btn-primary btn-sm" href="/rulename/list">Rule Name Management</a> or 
+			<a class="btn btn-primary btn-sm" href="/trade/list">Trade Management</a>
+		</div>
+	</div>
 </body>
 </html>
