@@ -11,11 +11,6 @@ import com.nnk.springboot.domain.User;
 public class PasswordValidator implements ConstraintValidator<PasswordRules, User> {
 
 	@Override
-	public void initialize(PasswordRules passwordRules) {
-
-	}
-
-	@Override
 	public boolean isValid(User user, ConstraintValidatorContext cxt) {
 		boolean majExist = false;
 		boolean digitExist = false;
@@ -27,26 +22,43 @@ public class PasswordValidator implements ConstraintValidator<PasswordRules, Use
 		specialCharacters.add('_');
 		boolean specialCharacterExist = false;
 		String password = user.getPassword();
-		int i;
-//		for (char c : password) {
+		int i; // Parcourir mon password
+		int n; // Parcourir ma liste de caractères spéciaux
+		boolean passwordSize = false;
 		for (i = 0; i < password.length(); i++) {
 			if (Character.isUpperCase(password.charAt(i))) {
 				majExist = true;
-			} else {
-				System.out.print("Votre mot de passe ne contient pas de majuscule");
 			}
 			if (Character.isDigit(password.charAt(i))) {
 				digitExist = true;
-			} else {
-				System.out.print("Votre mot de passe ne contient pas de chiffre");
 			}
-			for (Character j : specialCharacters) {
-				if (j.equals(password.charAt(i))) {
+			for (n = 0; n < specialCharacters.size(); n++) {
+				if (password.charAt(i) == specialCharacters.get(n)) {
 					specialCharacterExist = true;
 				}
 			}
 		}
-		return majExist && digitExist && specialCharacterExist;
+		if (password.length() >= 8) {
+			passwordSize = true;
+		}
+		if (!majExist) {
+			System.out.print("Votre mot de passe ne contient pas de majuscule\n");
+		}
+		if (!digitExist) {
+			System.out.print("Votre mot de passe ne contient pas de chiffre\n");
+		}
+		if (!specialCharacterExist) {
+			System.out.print("Votre mot de passe ne contient pas de caractères spéciaux\n");
+		}
+		if (!passwordSize) {
+			System.out.print("Votre mot de passe contient moins de 8 caractères\n");
+		}
+		return majExist && digitExist && specialCharacterExist && passwordSize;
+	}
+
+	@Override
+	public void initialize(PasswordRules passwordRules) {
+
 	}
 
 }

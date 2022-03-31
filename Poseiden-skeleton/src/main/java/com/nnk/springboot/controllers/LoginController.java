@@ -2,7 +2,6 @@ package com.nnk.springboot.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -67,15 +66,15 @@ public class LoginController {
 			@AuthenticationPrincipal OAuth2AuthenticationToken authenticationToken, HttpServletRequest request) {
 
 		// ----------------- Générer mot de passe aléatoire ---------------------------
-		String characterPassword = "0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXsYyZz!?/-_";
-		Random rnd = new Random();
-		StringBuilder passwordRandom = new StringBuilder(10);
-		String password;
-
-		for (int i = 0; i < 10; i++) {
-			passwordRandom.append(characterPassword.charAt(rnd.nextInt(characterPassword.length())));
-		}
-		password = passwordRandom.toString();
+//		String characterPassword = "0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXsYyZz!?/-_";
+//		Random rnd = new Random();
+//		StringBuilder passwordRandom = new StringBuilder(10);
+//		String password;
+//
+//		for (int i = 0; i < 10; i++) {
+//			passwordRandom.append(characterPassword.charAt(rnd.nextInt(characterPassword.length())));
+//		}
+//		password = passwordRandom.toString();
 		// ---------- Fin -------------------
 
 		OAuth2User user = authenticationToken.getPrincipal();
@@ -87,10 +86,9 @@ public class LoginController {
 			User newUser = new User();
 			newUser.setUsername(githubUserName);
 			newUser.setFullname(githubUserName);
-			newUser.setPassword(encoder.encode(password));
+//			newUser.setPassword(encoder.encode(password));
 			newUser.setRole("USER");
 			userFromDB = userRepository.save(newUser);
-			// return "redirect:/app/error";
 		}
 
 		GrantedAuthority authority = new SimpleGrantedAuthority(userFromDB.getRole());
@@ -99,7 +97,6 @@ public class LoginController {
 		Authentication authentication = new UsernamePasswordAuthenticationToken(userFromDB.getFullname(), null,
 				autorities);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-//		return "/bidList/list";
 		return "/menu";
 	}
 
