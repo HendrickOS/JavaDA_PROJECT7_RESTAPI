@@ -62,7 +62,7 @@ public class RuleNameController {
 		}
 		ruleName.setId(id);
 		ruleNameRepository.save(ruleName);
-		model.addAttribute("ruleName", ruleNameRepository.findAll());
+		model.addAttribute("rulename", ruleNameRepository.findAll());
 		return "redirect:/ruleName/list";
 	}
 

@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-@PasswordRules
 @Entity
 @Table(name = "users")
 public class User {
@@ -16,7 +15,7 @@ public class User {
 	private Integer id;
 	@NotBlank(message = "Username is mandatory")
 	private String username;
-//	@NotBlank(message = "Password is mandatory")
+	@PasswordRules
 	private String password;
 	@NotBlank(message = "FullName is mandatory")
 	private String fullname;

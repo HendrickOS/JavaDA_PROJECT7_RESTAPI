@@ -61,7 +61,7 @@ public class BidListController {
 		}
 		bidList.setBidListId(id);
 		bidListDao.save(bidList);
-		model.addAttribute("bidList", bidListDao.findAll());
+		model.addAttribute("bidlist", bidListDao.findAll());
 		return "redirect:/bidList/list";
 	}
 
