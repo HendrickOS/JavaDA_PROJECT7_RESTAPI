@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nnk.springboot.domain.RuleName;
-import com.nnk.springboot.repositories.RuleNameRepository;
+import com.nnk.springboot.services.RuleNameService;
 
 @Controller
 public class RuleNameController {
 
 	// TODO: Inject RuleName service
 	@Autowired
-	private RuleNameRepository ruleNameRepository;
+	private RuleNameService ruleNameRepository;
 
 	// TODO: find all RuleName, add to model
 	@RequestMapping("/ruleName/list")
@@ -46,8 +46,8 @@ public class RuleNameController {
 	// TODO: get RuleName by Id and to model then show to the form
 	@GetMapping("/ruleName/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-		RuleName ruleName = ruleNameRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid ruleName Id:" + id));
+		RuleName ruleName = ruleNameRepository.findById(id);
+//				.orElseThrow(() -> new IllegalArgumentException("Invalid ruleName Id:" + id));
 		model.addAttribute("ruleName", ruleName);
 		return "ruleName/update";
 	}
@@ -69,8 +69,8 @@ public class RuleNameController {
 	// TODO: Find RuleName by Id and delete the RuleName, return to Rule list
 	@GetMapping("/ruleName/delete/{id}")
 	public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
-		RuleName ruleName = ruleNameRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid ruleName Id:" + id));
+		RuleName ruleName = ruleNameRepository.findById(id);
+//				.orElseThrow(() -> new IllegalArgumentException("Invalid ruleName Id:" + id));
 		ruleNameRepository.delete(ruleName);
 		model.addAttribute("ruleName", ruleNameRepository.findAll());
 		return "redirect:/ruleName/list";

@@ -12,11 +12,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.repositories.BidListRepository;
+import com.nnk.springboot.services.BidListService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 public class BidTests {
 
+	@Autowired
+	private BidListService bidListService;
 	@Autowired
 	private BidListRepository bidListRepository;
 
@@ -25,22 +28,23 @@ public class BidTests {
 		BidList bid = new BidList("Account Test", "Type Test", 10d);
 
 		// Save
-		bid = bidListRepository.save(bid);
+		bid = bidListService.save(bid);
 		Assert.assertNotNull(bid.getBidListId());
 		Assert.assertEquals(bid.getBidQuantity(), 10d, 10d);
 
 		// Update
 		bid.setBidQuantity(20d);
-		bid = bidListRepository.save(bid);
+		bid = bidListService.save(bid);
 		Assert.assertEquals(bid.getBidQuantity(), 20d, 20d);
 
 		// Find
-		List<BidList> listResult = bidListRepository.findAll();
+		List<BidList> listResult = bidListService.findAll();
 		Assert.assertTrue(listResult.size() > 0);
 
 		// Delete
 		Integer id = bid.getBidListId();
-		bidListRepository.delete(bid);
+		bidListService.delete(bid);
+//		BidList bidList = bidListService.findById(id);
 		Optional<BidList> bidList = bidListRepository.findById(id);
 		Assert.assertFalse(bidList.isPresent());
 	}

@@ -1,4 +1,4 @@
-package com.nnk.springboot.dao;
+package com.nnk.springboot.services;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,7 +11,7 @@ import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.repositories.BidListRepository;
 
 @Component
-public class BidListDaoImpl implements BidListDao {
+public class BidListServiceImpl implements BidListService {
 
 	@Autowired
 	BidListRepository bidListRepository;
@@ -52,5 +52,4 @@ public class BidListDaoImpl implements BidListDao {
 		bidListRepository.delete(bidList);
 
 	}
-
 }

@@ -1,10 +1,10 @@
-package com.nnk.springboot.dao;
+package com.nnk.springboot.services;
 
 import java.util.List;
 
 import com.nnk.springboot.domain.BidList;
 
-public interface BidListDao {
+public interface BidListService {
 
 	BidList save(BidList bidList);
 

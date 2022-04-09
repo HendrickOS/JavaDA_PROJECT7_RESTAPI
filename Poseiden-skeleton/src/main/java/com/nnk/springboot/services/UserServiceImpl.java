@@ -1,4 +1,4 @@
-package com.nnk.springboot.dao;
+package com.nnk.springboot.services;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,7 +11,7 @@ import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 
 @Component
-public class UserDaoImpl implements UserDao {
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
@@ -39,6 +39,11 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User findById(Integer id) {
 		return userRepository.findById(id).get();
+	}
+
+	@Override
+	public void delete(User user) {
+		userRepository.delete(user);
 	}
 
 }

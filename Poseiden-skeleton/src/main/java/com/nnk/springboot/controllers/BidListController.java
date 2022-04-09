@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.nnk.springboot.dao.BidListDao;
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.services.BidListService;
 
 @Controller
 public class BidListController {
 
 	// TODO: Inject Bid service
 	@Autowired
-	BidListDao bidListDao;
+	BidListService bidListService;
 
 	// TODO: call service find all bids to show to the view
 	@RequestMapping("/bidList/list")
 	public String home(Model model) {
-		model.addAttribute("bidlist", bidListDao.findAll());
+		model.addAttribute("bidlist", bidListService.findAll());
 		return "bidList/list";
 	}
 
@@ -37,7 +37,7 @@ public class BidListController {
 	@PostMapping("/bidList/validate")
 	public String validate(@Valid BidList bid, BindingResult result, Model model) {
 		if (!result.hasErrors()) {
-			bidListDao.save(bid);
+			bidListService.save(bid);
 			return "redirect:/bidList/list";
 		}
 		return "bidList/add";
@@ -46,7 +46,7 @@ public class BidListController {
 	// TODO: get Bid by Id and to model then show to the form
 	@GetMapping("/bidList/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-		BidList bidList = bidListDao.findById(id);
+		BidList bidList = bidListService.findById(id);
 //				.orElseThrow(() -> new IllegalArgumentException("Invalid bidList Id:" + id));
 		model.addAttribute("bidList", bidList);
 		return "bidList/update";
@@ -60,20 +60,20 @@ public class BidListController {
 			return "bidList/update";
 		}
 		bidList.setBidListId(id);
-		bidListDao.save(bidList);
-		model.addAttribute("bidlist", bidListDao.findAll());
+		bidListService.save(bidList);
+		model.addAttribute("bidlist", bidListService.findAll());
 		return "redirect:/bidList/list";
 	}
 
 	// TODO: Find Bid by Id and delete the bid, return to Bid list
 	@GetMapping("/bidList/delete/{id}")
 	public String deleteBid(@PathVariable("id") Integer id, Model model) {
-		BidList bidList = bidListDao.findById(id);
+		BidList bidList = bidListService.findById(id);
 //				.orElseThrow(() -> new IllegalArgumentException("Invalid bidList Id:" + id));
 		if (bidList != null) {
-			bidListDao.delete(bidList);
+			bidListService.delete(bidList);
 		}
-		model.addAttribute("bidList", bidListDao.findAll());
+		model.addAttribute("bidList", bidListService.findAll());
 		return "redirect:/bidList/list";
 	}
 }

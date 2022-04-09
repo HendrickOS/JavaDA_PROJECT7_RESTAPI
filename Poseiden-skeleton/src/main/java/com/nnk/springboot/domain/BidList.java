@@ -231,4 +231,9 @@ public class BidList {
 		this.side = side;
 	}
 
+//	public boolean isPresent() {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+
 }

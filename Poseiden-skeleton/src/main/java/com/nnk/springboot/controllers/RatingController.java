@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.repositories.RatingRepository;
+import com.nnk.springboot.services.RatingService;
 
 @Controller
 public class RatingController {
 
 	// TODO: Inject Rating service
 	@Autowired
-	private RatingRepository ratingRepository;
+	private RatingService ratingService;
 
 	// TODO: find all Rating, add to model
 	@RequestMapping("/rating/list")
 	public String home(Model model) {
-		model.addAttribute("rating", ratingRepository.findAll());
+		model.addAttribute("rating", ratingService.findAll());
 		return "rating/list";
 	}
 
@@ -37,8 +37,8 @@ public class RatingController {
 	@PostMapping("/rating/validate")
 	public String validate(@Valid Rating rating, BindingResult result, Model model) {
 		if (!result.hasErrors()) {
-			ratingRepository.save(rating);
-			model.addAttribute("rating", ratingRepository.findAll());
+			ratingService.save(rating);
+			model.addAttribute("rating", ratingService.findAll());
 			return "redirect:/rating/list";
 		}
 		return "rating/add";
@@ -47,8 +47,8 @@ public class RatingController {
 	// TODO: get Rating by Id and to model then show to the form
 	@GetMapping("/rating/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-		Rating rating = ratingRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid rating Id:" + id));
+		Rating rating = ratingService.findById(id);
+//				.orElseThrow(() -> new IllegalArgumentException("Invalid rating Id:" + id));
 		model.addAttribute("rating", rating);
 		return "rating/update";
 	}
@@ -62,18 +62,18 @@ public class RatingController {
 			return "rating/update";
 		}
 		rating.setId(id);
-		ratingRepository.save(rating);
-		model.addAttribute("rating", ratingRepository.findAll());
+		ratingService.save(rating);
+		model.addAttribute("rating", ratingService.findAll());
 		return "redirect:/rating/list";
 	}
 
 	// TODO: Find Rating by Id and delete the Rating, return to Rating list
 	@GetMapping("/rating/delete/{id}")
 	public String deleteRating(@PathVariable("id") Integer id, Model model) {
-		Rating rating = ratingRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid rating Id:" + id));
-		ratingRepository.delete(rating);
-		model.addAttribute("rating", ratingRepository.findAll());
+		Rating rating = ratingService.findById(id);
+//				.orElseThrow(() -> new IllegalArgumentException("Invalid rating Id:" + id));
+		ratingService.delete(rating);
+		model.addAttribute("rating", ratingService.findAll());
 		return "redirect:/rating/list";
 	}
 }

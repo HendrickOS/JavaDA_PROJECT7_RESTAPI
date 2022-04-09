@@ -1,10 +1,10 @@
-package com.nnk.springboot.dao;
+package com.nnk.springboot.services;
 
 import java.util.List;
 
 import com.nnk.springboot.domain.User;
 
-public interface UserDao {
+public interface UserService {
 
 	User save(User user);
 
@@ -13,5 +13,7 @@ public interface UserDao {
 	User findByUsername(String username);
 
 	User findById(Integer id);
+
+	void delete(User user);
 
 }
